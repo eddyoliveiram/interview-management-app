@@ -3,7 +3,7 @@ import { TextField, MenuItem, Grid, Button, Typography } from '@mui/material';
 
 const FormFields = ({ formData, handleChange, handleFileChange, errors }) => (
     <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} sx={{ mt: 2 }}>
             <TextField
                 label="Empresa"
                 name="empresa"

@@ -35,7 +35,7 @@ const VagaTable = ({
                     <TableRow className={'bg-gray-200'}>
                         <TableCell><strong>Empresa</strong></TableCell>
                         <TableCell><strong>Cargo</strong></TableCell>
-                        <TableCell><strong>Descrição</strong></TableCell>
+                        <TableCell><strong>Link da Vaga</strong></TableCell>
                         <TableCell><strong>Currículo Enviado</strong></TableCell>
                         <TableCell><strong>Salário/Modalidade</strong></TableCell>
                         <TableCell><strong>Origem</strong></TableCell>
@@ -60,7 +60,21 @@ const VagaTable = ({
                         >
                             <TableCell>{vaga.empresa}</TableCell>
                             <TableCell>{vaga.cargo}</TableCell>
-                            <TableCell>{vaga.descricaoVaga}</TableCell>
+                            <TableCell align="center">
+                                {vaga.descricaoVaga ? (
+                                    <Link
+                                        href={vaga.descricaoVaga} // URL da descrição da vaga
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <VisibilityIcon sx={{ marginRight: '5px' }} />
+                                        Ver
+                                    </Link>
+                                ) : (
+                                    'Nenhuma descrição'
+                                )}
+                            </TableCell>
+
                             <TableCell align="center">
                                 {vaga.curriculoEnviado ? (
                                     <Link
