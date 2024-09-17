@@ -1,37 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, TablePagination } from '@mui/material';
 import VagaActions from './VagaActions';
 
-const VagaTable = ({ onEdit, onDelete }) => {
-    const [vagas, setVagas] = useState([]);
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [totalVagas, setTotalVagas] = useState(0);
-
-    const fetchVagas = async (page, limit) => {
-        try {
-            const response = await fetch(`/api/vagas?page=${page}&limit=${limit}`);
-            const data = await response.json();
-            setVagas(data.data);
-            setTotalVagas(data.total);
-        } catch (error) {
-            console.error('Erro ao buscar vagas:', error);
-        }
-    };
-
-    useEffect(() => {
-        fetchVagas(page, rowsPerPage);
-    }, [page, rowsPerPage]);
-
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-    };
-
+const VagaTable = ({ vagas, onEdit, onDelete, page, rowsPerPage, totalVagas, handleChangePage, handleChangeRowsPerPage }) => {
     if (!vagas || vagas.length === 0) {
         return <Typography variant="body1">Nenhuma vaga disponível</Typography>;
     }
@@ -77,9 +48,9 @@ const VagaTable = ({ onEdit, onDelete }) => {
                 component="div"
                 count={totalVagas}
                 page={page}
-                onPageChange={handleChangePage}
+                onPageChange={handleChangePage}                // Use the prop here
                 rowsPerPage={rowsPerPage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
+                onRowsPerPageChange={handleChangeRowsPerPage}  // And here
                 rowsPerPageOptions={[5, 10, 25]}
             />
         </TableContainer>

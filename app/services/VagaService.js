@@ -1,7 +1,7 @@
-export const fetchVagas = async () => {
-    const response = await fetch('/api/vagas');
-    const data = await response.json();
-    return data.data || [];
+export const fetchVagas = async (page, limit) => {
+    const response = await fetch(`/api/vagas?page=${page}&limit=${limit}`);
+    const result = await response.json();
+    return { data: result.data, total: result.total };
 };
 
 export const createVaga = async (vaga) => {
