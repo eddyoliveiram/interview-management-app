@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+# Job Vacancy Management System
+
+This is a **job vacancy management system** built using **React/Next.js**, **Material-UI** and **MongoDB** . The system allows users to manage job openings by adding, editing, deleting, and listing vacancies. It also supports **pagination** and **file uploads** for resumes in **PDF/Word** formats.
+
+## Features
+
+- Add, edit, delete, and list job vacancies
+- Pagination for better data management
+- Upload files (PDF/Word) for resumes
+- Data persistence with MongoDB
+- API endpoints for job vacancy management
+- UI built with **Material-UI (MUI)** for a modern and responsive interface
+
+## Prerequisites
+
+Before running the project, ensure that you have the following installed:
+
+- Node.js
+- MongoDB
+- Yarn or npm
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/job-vacancy-management-system.git
+cd job-vacancy-management-system
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure environment variables
+
+Create a `.env` file in the root directory with the following content:
+
+```
+MONGODB_URI=mongodb://127.0.0.1:27017/gerenciamentoVagas
+```
+
+### 4. Run the application
+
+To start the development server, run:
+
+```bash
+yarn dev
+```
+
+or
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 5. Running MongoDB Migrations
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+This system uses **migrate-mongo** for managing MongoDB migrations. Before running the migrations, make sure MongoDB is running locally.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+To run the MongoDB migration, execute the following command:
 
-## Learn More
+```bash
+migrate-mongo up
+```
 
-To learn more about Next.js, take a look at the following resources:
+This command will:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Drop the existing `gerenciamentoVagas` database (if it exists)
+- Create the `vagas` collection with the appropriate index
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+To revert the migration, you can run:
 
-## Deploy on Vercel
+```bash
+migrate-mongo down
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## API Endpoints
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- `GET /api/vagas`: List all job vacancies with pagination.
+- `POST /api/vagas`: Create a new job vacancy.
+- `PUT /api/vagas/[id]`: Update an existing job vacancy.
+- `DELETE /api/vagas/[id]`: Delete a job vacancy.
+
+## License
+
+This project is licensed under the MIT License.
