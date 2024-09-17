@@ -1,0 +1,66 @@
+[33mcommit 8b0709eaf6e01ca4e52da167ed2dfa3a951cff58[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Eddy Oliveira Mesquita <eddy_eom@hotmail.com>
+Date:   Tue Sep 17 16:38:30 2024 -0300
+
+    refactor: upload
+
+[33mcommit a4cca8b9a996987343b35528795bda1af606345e[m
+Author: Eddy Oliveira Mesquita <eddy_eom@hotmail.com>
+Date:   Tue Sep 17 16:36:41 2024 -0300
+
+    refactor: table
+
+[33mcommit 2637609287f06f2dbd7441891d20bc422e82d8cf[m
+Author: Eddy Oliveira Mesquita <eddy_eom@hotmail.com>
+Date:   Tue Sep 17 14:21:35 2024 -0300
+
+    add edit vaga
+
+[33mcommit 8bcd6fb711e6a35e5e614846c1efff36e3821453[m
+Author: Eddy Oliveira Mesquita <eddy_eom@hotmail.com>
+Date:   Tue Sep 17 13:45:44 2024 -0300
+
+    feat: update vaga
+
+[33mcommit 3679a4bf3d8c24389f969bedeef713ef892cd136[m
+Author: Eddy Oliveira Mesquita <eddy_eom@hotmail.com>
+Date:   Tue Sep 17 13:45:10 2024 -0300
+
+    feat: update vaga
+
+[33mcommit f7b580a5dce2bf23a919e3fd94f15c250bb903eb[m
+Author: Eddy Oliveira Mesquita <eddy_eom@hotmail.com>
+Date:   Tue Sep 17 12:50:03 2024 -0300
+
+    feat: add create and delete
+
+[33mcommit f98e1ee1c7b08fec0256facfbf15455c02dedf4f[m
+Merge: d2ce95d 3834fb4
+Author: Eddy Oliveira Mesquita <eddy_eom@hotmail.com>
+Date:   Mon Sep 16 23:43:34 2024 -0300
+
+    Merge branch 'master' of https://github.com/eddyoliveiram/interview-management-app
+
+[33mcommit d2ce95dd1eb6665e973438af0fdcee4350b551ff[m
+Author: Eddy Oliveira Mesquita <eddy_eom@hotmail.com>
+Date:   Mon Sep 16 23:43:07 2024 -0300
+
+    refactor: rename main folder
+
+[33mcommit 3834fb426f95a7a4e02d9cef1eb5943e951c5d68[m
+Author: eddyoliveiram <37080411+eddyoliveiram@users.noreply.github.com>
+Date:   Mon Sep 16 23:42:04 2024 -0300
+
+    Update README.md
+
+[33mcommit 88364c7053f4f7325962157e3762b56bf4880a43[m
+Author: Eddy Oliveira Mesquita <eddy_eom@hotmail.com>
+Date:   Mon Sep 16 23:27:05 2024 -0300
+
+    Initial Commit
+
+[33mcommit fbd7af275b7a77b65f4e41cc02655772b2939b2d[m
+Author: Eddy Oliveira Mesquita <eddy_eom@hotmail.com>
+Date:   Mon Sep 16 15:12:47 2024 -0300
+
+    Initial commit from Create Next App
