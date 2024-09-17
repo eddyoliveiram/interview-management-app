@@ -23,22 +23,35 @@ export async function GET(req, { params }) {
 export async function PUT(req, { params }) {
     await dbConnect();
 
-    try {
-        const body = await req.json();
-        const vagaAtualizada = await Vaga.findByIdAndUpdate(params.id, body, { new: true });
+    const { id } = params;
 
-        if (!vagaAtualizada) {
+    try {
+        const vaga = await Vaga.findById(id);
+
+        if (!vaga) {
             return NextResponse.json({ success: false, message: 'Vaga não encontrada' }, { status: 404 });
         }
 
-        return NextResponse.json({ success: true, data: vagaAtualizada });
+        const body = await req.json();
+
+        vaga.empresa = body.empresa;
+        vaga.cargo = body.cargo;
+        vaga.descricaoVaga = body.descricaoVaga;
+        vaga.salarioModalidade = body.salarioModalidade;
+        vaga.origem = body.origem;
+        vaga.status = body.status;
+        vaga.curriculoEnviado = body.curriculoEnviado; // Certifique-se de que este campo está sendo atualizado
+
+        await vaga.save();
+
+        return NextResponse.json({ success: true, data: vaga });
     } catch (error) {
-        console.error('Erro ao atualizar vaga:', error.message);
-        return NextResponse.json({ success: false, message: error.message }, { status: 400 });
+        console.error('Erro ao atualizar vaga:', error);
+        return NextResponse.json({ success: false, message: error.message }, { status: 500 });
     }
 }
 
-// Método DELETE para excluir uma vaga pelo ID
+
 export async function DELETE(req, { params }) {
     await dbConnect();
 

@@ -1,8 +1,13 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from 'react';
 import VagaTable from '@/app/components/VagaTable';
 import VagaFormModal from '@/app/components/VagaFormModal';
-import { fetchVagas, deleteVaga } from '@/app/services/VagaService';
+import {
+    fetchVagas,
+    createVaga,
+    updateVaga,
+    deleteVaga,
+} from '@/app/services/VagaService';
 import { Button } from '@mui/material';
 import Swal from 'sweetalert2';
 
@@ -42,7 +47,18 @@ const Home = () => {
 
         if (result.isConfirmed) {
             await deleteVaga(vagaId);
+
+            // Calcular quantas vagas sobraram na página atual
+            const remainingVagas = vagas.length - 1;
+
+            // Se excluirmos a última vaga da página, precisamos voltar uma página
+            if (remainingVagas === 0 && page > 0) {
+                setPage(page - 1);
+            }
+
+            // Atualizar as vagas após a exclusão
             await refreshVagas(page, rowsPerPage);
+
             Swal.fire({
                 icon: 'success',
                 title: 'Deletado!',
@@ -51,6 +67,13 @@ const Home = () => {
                 showConfirmButton: false,
             });
         }
+    };
+
+
+    const handleSave = async () => {
+        setPage(0);
+        await refreshVagas(0, rowsPerPage);
+        setModalOpen(false);
     };
 
     const handleChangePage = (event, newPage) => {
@@ -63,10 +86,13 @@ const Home = () => {
         setPage(0);
     };
 
-
     return (
         <div style={{ padding: '20px' }}>
-            <Button variant="contained" color="success" onClick={() => handleEdit(null)}>
+            <Button
+                variant="contained"
+                color="success"
+                onClick={() => handleEdit(null)}
+            >
                 Adicionar Vaga
             </Button>
             <VagaTable
