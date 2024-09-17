@@ -26,9 +26,19 @@ export const updateVaga = async (vaga) => {
     return response.json();
 };
 
-export const deleteVaga = async (vagaId) => {
-    const response = await fetch(`/api/vagas/${vagaId}`, {
+export const deleteVaga = async (vagaId, fileUrl) => {
+    await fetch(`/api/vagas/${vagaId}`, {
         method: 'DELETE',
     });
-    return response.json();
+
+    if (fileUrl) {
+        await fetch('/api/delete-file', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ fileUrl }),
+        });
+    }
 };
+

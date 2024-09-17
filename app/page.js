@@ -2,14 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import VagaTable from '@/app/components/VagaTable';
 import VagaFormModal from '@/app/components/VagaFormModal';
-import {
-    fetchVagas,
-    createVaga,
-    updateVaga,
-    deleteVaga,
-} from '@/app/services/VagaService';
+import { fetchVagas, deleteVaga } from '@/app/services/VagaService';
 import { Button } from '@mui/material';
 import Swal from 'sweetalert2';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+
 
 const Home = () => {
     const [vagas, setVagas] = useState([]);
@@ -19,8 +16,8 @@ const Home = () => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [totalVagas, setTotalVagas] = useState(0);
 
-    const refreshVagas = async (page = 0, limit = 5) => {
-        const { data, total } = await fetchVagas(page, limit);
+    const refreshVagas = async (currentPage = 0, limit = 5) => {
+        const { data, total } = await fetchVagas(currentPage, limit);
         setVagas(data);
         setTotalVagas(total);
     };
@@ -34,7 +31,9 @@ const Home = () => {
         setModalOpen(true);
     };
 
-    const handleDelete = async (vagaId) => {
+    const handleDelete = async (vagaId, fileUrl) => {
+        console.log('ID da vaga a ser deletada:', vagaId);
+        console.log('URL do arquivo a ser deletado:', fileUrl);
         const result = await Swal.fire({
             title: 'Tem certeza que deseja deletar esta vaga?',
             icon: 'warning',
@@ -46,17 +45,14 @@ const Home = () => {
         });
 
         if (result.isConfirmed) {
-            await deleteVaga(vagaId);
+            await deleteVaga(vagaId, fileUrl);
 
-            // Calcular quantas vagas sobraram na página atual
             const remainingVagas = vagas.length - 1;
 
-            // Se excluirmos a última vaga da página, precisamos voltar uma página
             if (remainingVagas === 0 && page > 0) {
                 setPage(page - 1);
             }
 
-            // Atualizar as vagas após a exclusão
             await refreshVagas(page, rowsPerPage);
 
             Swal.fire({
@@ -68,7 +64,6 @@ const Home = () => {
             });
         }
     };
-
 
     const handleSave = async () => {
         setPage(0);
@@ -92,6 +87,7 @@ const Home = () => {
                 variant="contained"
                 color="success"
                 onClick={() => handleEdit(null)}
+                startIcon={<AddCircleIcon />}
             >
                 Adicionar Vaga
             </Button>

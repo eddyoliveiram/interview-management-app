@@ -13,10 +13,13 @@ export async function POST(req) {
 
         const arrayBuffer = await file.arrayBuffer();
         const buffer = new Uint8Array(arrayBuffer);
-        const uploadPath = path.join(process.cwd(), 'public/uploads', file.name);
+        const originalFilename = file.name;
+        const fileExtension = path.extname(originalFilename);
+        const uniqueFilename = `${Date.now()}${fileExtension}`;
+        const uploadPath = path.join(process.cwd(), 'public/uploads', uniqueFilename);
         await fs.writeFile(uploadPath, buffer);
 
-        return NextResponse.json({ status: "success", fileUrl: `/uploads/${file.name}` });
+        return NextResponse.json({ status: "success", fileUrl: `/uploads/${uniqueFilename}` });
     } catch (e) {
         console.error(e);
         return NextResponse.json({ status: "fail", error: e.message }, { status: 500 });

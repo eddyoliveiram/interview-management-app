@@ -1,8 +1,29 @@
 import React from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, TablePagination } from '@mui/material';
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper,
+    Typography,
+    TablePagination,
+    Link,
+} from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import VagaActions from './VagaActions';
 
-const VagaTable = ({ vagas, onEdit, onDelete, page, rowsPerPage, totalVagas, handleChangePage, handleChangeRowsPerPage }) => {
+const VagaTable = ({
+                       vagas,
+                       onEdit,
+                       onDelete,
+                       page,
+                       rowsPerPage,
+                       totalVagas,
+                       handleChangePage,
+                       handleChangeRowsPerPage,
+                   }) => {
     if (!vagas || vagas.length === 0) {
         return <Typography variant="body1">Nenhuma vaga disponível</Typography>;
     }
@@ -11,7 +32,7 @@ const VagaTable = ({ vagas, onEdit, onDelete, page, rowsPerPage, totalVagas, han
         <TableContainer component={Paper} sx={{ marginTop: '20px', width: '100%' }}>
             <Table>
                 <TableHead>
-                    <TableRow>
+                    <TableRow className={'bg-gray-200'}>
                         <TableCell><strong>Empresa</strong></TableCell>
                         <TableCell><strong>Cargo</strong></TableCell>
                         <TableCell><strong>Descrição</strong></TableCell>
@@ -22,18 +43,38 @@ const VagaTable = ({ vagas, onEdit, onDelete, page, rowsPerPage, totalVagas, han
                         <TableCell><strong>Ações</strong></TableCell>
                     </TableRow>
                 </TableHead>
-                <TableBody>
+                <TableBody
+                    sx={{
+                    '& .MuiTableCell-root': {
+                        fontWeight: 'bold',
+                        },
+                    }}
+                >
                     {vagas.map((vaga) => (
                         <TableRow
                             key={vaga._id}
                             sx={{
-                                backgroundColor: vaga.status === 'Currículo Rejeitado' ? '#f8d7da' : 'transparent',
+                                backgroundColor:
+                                    vaga.status === 'Currículo Rejeitado' ? '#f8d7da' : 'transparent',
                             }}
                         >
                             <TableCell>{vaga.empresa}</TableCell>
                             <TableCell>{vaga.cargo}</TableCell>
                             <TableCell>{vaga.descricaoVaga}</TableCell>
-                            <TableCell>{vaga.curriculoEnviado}</TableCell>
+                            <TableCell align="center">
+                                {vaga.curriculoEnviado ? (
+                                    <Link
+                                        href={vaga.curriculoEnviado}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <VisibilityIcon sx={{ marginRight: '5px' }} />
+                                        Ver
+                                    </Link>
+                                ) : (
+                                    'Nenhum documento'
+                                )}
+                            </TableCell>
                             <TableCell>{vaga.salarioModalidade}</TableCell>
                             <TableCell>{vaga.origem}</TableCell>
                             <TableCell>{vaga.status}</TableCell>
@@ -48,9 +89,9 @@ const VagaTable = ({ vagas, onEdit, onDelete, page, rowsPerPage, totalVagas, han
                 component="div"
                 count={totalVagas}
                 page={page}
-                onPageChange={handleChangePage}                // Use the prop here
+                onPageChange={handleChangePage}
                 rowsPerPage={rowsPerPage}
-                onRowsPerPageChange={handleChangeRowsPerPage}  // And here
+                onRowsPerPageChange={handleChangeRowsPerPage}
                 rowsPerPageOptions={[5, 10, 25]}
             />
         </TableContainer>

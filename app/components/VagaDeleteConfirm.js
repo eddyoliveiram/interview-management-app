@@ -4,7 +4,7 @@ import React from 'react';
 
 const VagaDeleteConfirm = ({ vaga, onDelete }) => {
     const handleDelete = () => {
-        onDelete(vaga._id);
+        onDelete(vaga._id, vaga.curriculoEnviado);
     };
 
     return (
@@ -15,3 +15,4 @@ const VagaDeleteConfirm = ({ vaga, onDelete }) => {
 };
 
 export default VagaDeleteConfirm;
+
