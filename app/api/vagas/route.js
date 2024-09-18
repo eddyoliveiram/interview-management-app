@@ -32,6 +32,7 @@ export async function POST(req) {
 
     try {
         const body = await req.json();
+        console.log(body)
         const novaVaga = new Vaga({
             empresa: body.empresa,
             cargo: body.cargo,
@@ -39,7 +40,8 @@ export async function POST(req) {
             salarioModalidade: body.salarioModalidade,
             origem: body.origem,
             status: body.status,
-            curriculoEnviado: body.curriculoEnviado
+            curriculoEnviado: body.curriculoEnviado,
+            notas: body.notas
         });
 
         await novaVaga.save();

@@ -14,6 +14,15 @@ import {
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VagaActions from './VagaActions';
 
+// Função para calcular a diferença de dias
+const calcularDiasDesde = (data) => {
+    const dataAtual = new Date();
+    const dataCriacao = new Date(data);
+    const diferencaTempo = dataAtual - dataCriacao; // Diferença em milissegundos
+    const diferencaDias = Math.floor(diferencaTempo / (1000 * 60 * 60 * 24)); // Convertendo para dias
+    return diferencaDias;
+};
+
 const VagaTable = ({
                        vagas,
                        onEdit,
@@ -40,13 +49,14 @@ const VagaTable = ({
                         <TableCell><strong>Salário/Modalidade</strong></TableCell>
                         <TableCell><strong>Origem</strong></TableCell>
                         <TableCell><strong>Status</strong></TableCell>
+                        <TableCell><strong>Enviado há</strong></TableCell> {/* Nova Coluna */}
                         <TableCell><strong>Ações</strong></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody
                     sx={{
-                    '& .MuiTableCell-root': {
-                        fontWeight: 'bold',
+                        '& .MuiTableCell-root': {
+                            fontWeight: 'bold',
                         },
                     }}
                 >
@@ -92,6 +102,9 @@ const VagaTable = ({
                             <TableCell>{vaga.salarioModalidade}</TableCell>
                             <TableCell>{vaga.origem}</TableCell>
                             <TableCell>{vaga.status}</TableCell>
+                            <TableCell>
+                                {vaga.createdAt ? `${calcularDiasDesde(vaga.createdAt)} dias atrás` : 'Data desconhecida'}
+                            </TableCell> {/* Exibe a diferença de dias */}
                             <TableCell>
                                 <VagaActions vaga={vaga} onEdit={onEdit} onDelete={onDelete} />
                             </TableCell>

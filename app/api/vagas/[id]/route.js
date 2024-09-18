@@ -40,7 +40,8 @@ export async function PUT(req, { params }) {
         vaga.salarioModalidade = body.salarioModalidade;
         vaga.origem = body.origem;
         vaga.status = body.status;
-        vaga.curriculoEnviado = body.curriculoEnviado; // Certifique-se de que este campo está sendo atualizado
+        vaga.curriculoEnviado = body.curriculoEnviado;
+        vaga.notas = body.notas;
 
         await vaga.save();
 
@@ -50,6 +51,7 @@ export async function PUT(req, { params }) {
         return NextResponse.json({ success: false, message: error.message }, { status: 500 });
     }
 }
+
 
 
 export async function DELETE(req, { params }) {

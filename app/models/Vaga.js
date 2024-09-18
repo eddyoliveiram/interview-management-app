@@ -22,6 +22,9 @@ const VagaSchema = new mongoose.Schema({
         enum: ['Currículo Enviado', 'Currículo Rejeitado', 'Fase 01', 'Fase 02', 'Fase 03', 'Fase 04'],
         default: 'Currículo Enviado',
     },
+    notas: {
+        type: String,
+    }
 }, { timestamps: true });
 
 module.exports = mongoose.models.Vaga || mongoose.model('Vaga', VagaSchema);

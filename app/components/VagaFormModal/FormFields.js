@@ -107,12 +107,27 @@ const FormFields = ({ formData, handleChange, handleFileChange, errors }) => (
             >
                 <MenuItem value="Currículo Enviado">Currículo Enviado</MenuItem>
                 <MenuItem value="Currículo Rejeitado">Currículo Rejeitado</MenuItem>
+                <MenuItem value="Sem Resposta">Sem Resposta (+30 dias)</MenuItem>
                 <MenuItem value="Fase 01">Fase 01</MenuItem>
                 <MenuItem value="Fase 02">Fase 02</MenuItem>
                 <MenuItem value="Fase 03">Fase 03</MenuItem>
                 <MenuItem value="Fase 04">Fase 04</MenuItem>
             </TextField>
         </Grid>
+        <Grid item xs={12}>
+            <TextField
+                label="Notas"
+                name="notas"
+                value={formData.notas}
+                onChange={handleChange}
+                multiline
+                rows={4}
+                fullWidth
+                error={!!errors.notas}
+                helperText={errors.notas}
+            />
+        </Grid>
+
     </Grid>
 );
 

@@ -22,6 +22,7 @@ const VagaFormModal = ({ open, onClose, vaga, refreshVagas }) => {
         origem: 'Jobs',
         status: 'Currículo Enviado',
         oldCurriculoEnviado: null,
+        notas: '',
     });
 
     const [errors, setErrors] = useState({});
@@ -37,6 +38,7 @@ const VagaFormModal = ({ open, onClose, vaga, refreshVagas }) => {
                 origem: vaga.origem || 'Jobs',
                 status: vaga.status || 'Currículo Enviado',
                 oldCurriculoEnviado: vaga.curriculoEnviado || null,
+                notas: vaga.notas ? vaga.notas : '',
             });
         } else {
             setFormData({
@@ -48,6 +50,7 @@ const VagaFormModal = ({ open, onClose, vaga, refreshVagas }) => {
                 origem: 'Jobs',
                 status: 'Currículo Enviado',
                 oldCurriculoEnviado: null,
+                notas: '',
             });
         }
         setErrors({});
