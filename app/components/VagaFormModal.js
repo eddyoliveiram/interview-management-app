@@ -158,12 +158,26 @@ const VagaFormModal = ({ open, onClose, vaga, refreshVagas }) => {
                 });
             }
 
+            // Resetando o formulário após o sucesso
+            setFormData({
+                empresa: '',
+                cargo: '',
+                descricaoVaga: '',
+                curriculoEnviado: null,
+                salarioModalidade: '',
+                origem: 'Jobs',
+                status: 'Currículo Enviado',
+                oldCurriculoEnviado: null,
+                notas: '',
+            });
+            setErrors({});
             onClose();
             refreshVagas();
         } catch (error) {
             console.error('Erro ao salvar a vaga:', error);
         }
     };
+
 
     return (
         <Dialog open={open} onClose={onClose}>
